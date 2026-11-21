@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instituto Veterinario San Martín de Porres</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       LOGIN SCREEN
+  ═══════════════════════════════════════════════════════ -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="login-logo">
+          <img src="assets/logo.png" alt="Instituto Veterinario San Martín de Porres" class="login-logo-img">
+        </div>
+        <h1 class="login-title">Instituto Veterinario</h1>
+        <p class="login-subtitle">San Martín de Porres · Sistema Académico</p>
+      </div>
+      <div class="login-body">
+        <div id="login-error" class="login-error hidden"></div>
+        <form id="login-form" class="form-grid" novalidate>
+          <div class="form-group">
+            <label class="form-label required" for="login-email">Correo electrónico</label>
+            <input type="email" id="login-email" name="email"
+              class="form-control" autocomplete="email"
+              placeholder="tu@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label required" for="login-password">Contraseña</label>
+            <input type="password" id="login-password" name="password"
+              class="form-control" autocomplete="current-password"
+              placeholder="••••••••" required>
+          </div>
+          <button type="submit" id="login-btn" class="btn btn-primary btn-lg">
+            Ingresar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       APP SHELL
+  ═══════════════════════════════════════════════════════ -->
+  <div id="app" class="app hidden">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <img src="assets/logo.png" alt="Instituto Veterinario San Martín de Porres" class="brand-icon-img">
+        </div>
+        <div class="brand-text">
+          <div class="brand-name">Instituto Vet.</div>
+          <div class="brand-sub">San Martín de Porres</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <p class="nav-section-label">Principal</p>
+        </div>
+        <button class="nav-link" data-route="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-link" data-route="grupos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Grupos
+        </button>
+        <button class="nav-link" data-route="cronograma">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Cronograma
+        </button>
+        <button class="nav-link" data-route="estudiantes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Estudiantes
+        </button>
+        <button class="nav-link" data-route="inscripciones">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          Inscripciones & Pagos
+        </button>
+        <button class="nav-link" data-route="notas">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Notas
+        </button>
+        <button class="nav-link" data-route="agendamiento">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
+          Agendamiento
+        </button>
+        <button class="nav-link" data-route="practicas">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Horas de práctica
+        </button>
+
+        <div class="nav-section" style="margin-top:var(--space-4)">
+          <p class="nav-section-label">Configuración</p>
+        </div>
+        <button class="nav-link" data-route="cursos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          Cursos
+        </button>
+        <button class="nav-link" data-route="usuarios">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Usuarios
+        </button>
+        <button class="nav-link" data-route="importacion">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Importación
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar" id="sidebar-avatar">—</div>
+          <div class="user-info">
+            <div id="sidebar-user-name">Cargando…</div>
+            <div id="sidebar-user-role"></div>
+          </div>
+        </div>
+        <button id="btn-logout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Cerrar sesión
+        </button>
+      </div>
+    </aside>
+
+    <!-- Sidebar overlay (mobile) -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <button id="btn-menu-toggle" aria-label="Abrir menú">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <span id="topbar-title">Dashboard</span>
+        <div class="topbar-spacer"></div>
+        <div class="topbar-actions">
+          <span id="topbar-date" class="text-sm text-muted"></span>
+        </div>
+      </header>
+
+      <!-- MAIN CONTENT (views render here) -->
+      <main id="main-content" class="main-content">
+        <!-- Rendered by router.js -->
+      </main>
+
+    </div><!-- /.main-wrapper -->
+  </div><!-- /#app -->
+
+  <!-- MODAL -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div id="modal" class="modal modal-md">
+      <!-- Populated by ui.js showModal() -->
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Lucide icons (UMD) -->
+  <script src="https://unpkg.com/lucide@0.263.1/dist/umd/lucide.min.js"></script>
+  <!-- SheetJS para importación Excel -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <!-- jsPDF para exportaciones PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- App entry point (ES module) -->
+  <script type="module" src="js/main.js"></script>
+
+  <!-- Set current date in topbar -->
+  <script>
+    const dateEl = document.getElementById('topbar-date');
+    if (dateEl) {
+      dateEl.textContent = new Date().toLocaleDateString('es-MX', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+    }
+
+    // Update sidebar avatar initials when name changes (simple MutationObserver)
+    const avatarEl = document.getElementById('sidebar-avatar');
+    const nameEl   = document.getElementById('sidebar-user-name');
+    if (avatarEl && nameEl) {
+      new MutationObserver(() => {
+        const words = nameEl.textContent.trim().split(' ');
+        avatarEl.textContent = (words[0]?.[0] || '') + (words[1]?.[0] || '');
+      }).observe(nameEl, { childList: true, characterData: true, subtree: true });
+    }
+  </script>
+</body>
+</html>

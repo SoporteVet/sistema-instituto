@@ -1,0 +1,23 @@
+# Firebase config (contiene credenciales — NO subir al repo)
+js/firebase-config.js
+
+# Node (si se usan herramientas locales)
+node_modules/
+npm-debug.log*
+
+# Cursor (local del IDE)
+.cursor/
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+.firebase/

@@ -1,0 +1,118 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function isActive() {
+      return isAuthenticated() && userDoc().data.activo == true;
+    }
+
+    function role() {
+      return userDoc().data.rol;
+    }
+
+    function isAdmin() {
+      return isActive() && role() == 'admin';
+    }
+
+    function isProfesor() {
+      return isActive() && role() == 'profesor';
+    }
+
+    // Cualquier usuario con rol válido y activo del sistema.
+    function isActiveStaff() {
+      return isActive() && role() in [
+        'admin', 'vida_estudiantil', 'matriculas',
+        'coordinacion', 'director', 'profesor'
+      ];
+    }
+
+    function isEstudiante() {
+      return isActive() && role() == 'estudiante';
+    }
+
+    // Roles que pueden editar matrícula/estudiantes.
+    function canEditMatricula() {
+      return isActive() && role() in [
+        'admin', 'matriculas', 'vida_estudiantil',
+        'coordinacion', 'director'
+      ];
+    }
+
+    function canMarcarPractica() {
+      return canEditMatricula() || isEstudiante();
+    }
+
+    match /users/{userId} {
+      allow get: if isAuthenticated() && request.auth.uid == userId;
+      allow list: if isAdmin();
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasAll(['nombre', 'email', 'rol', 'activo'])
+        && request.resource.data.rol in [
+          'admin', 'vida_estudiantil', 'matriculas',
+          'coordinacion', 'director', 'profesor', 'estudiante'
+        ]
+        && request.resource.data.activo is bool
+        && request.resource.data.nombre is string
+        && request.resource.data.email is string;
+      allow update, delete: if isAdmin();
+    }
+
+    match /students/{studentId} {
+      allow read: if isActiveStaff() || isEstudiante();
+      allow create, update: if canEditMatricula();
+      allow delete: if isAdmin();
+    }
+
+    match /courses/{courseId} {
+      allow read: if isActiveStaff();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /enrollments/{enrollmentId} {
+      allow read: if isActiveStaff();
+      allow create, delete: if canEditMatricula();
+      allow update: if isActiveStaff();
+    }
+
+    match /groups/{groupId} {
+      allow read: if isActiveStaff();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /cronograma/{entryId} {
+      allow read: if isActiveStaff();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /proyectoFinal/{docId} {
+      allow read: if isActiveStaff();
+      allow create, update: if canEditMatricula();
+      allow delete: if isAdmin();
+    }
+
+    match /agendamiento/{docId} {
+      allow read: if isActiveStaff();
+      allow create, update, delete: if canEditMatricula();
+    }
+
+    match /practicaAreas/{docId} {
+      allow read: if isActiveStaff() || isEstudiante();
+      allow create, update: if canEditMatricula();
+      allow delete: if isAdmin();
+    }
+
+    match /practicaRegistros/{docId} {
+      allow read: if isActiveStaff() || isEstudiante();
+      allow create, update: if canMarcarPractica();
+      allow delete: if isAdmin();
+    }
+  }
+}
